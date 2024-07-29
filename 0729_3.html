@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script>
+      window.addEventListener("load", function () {});
+      window.onload = function () {
+        console.dir(window.document.body);
+
+        var memoTxt = document.getElementById("memoTxt");
+        var demo = document.querySelector('#demo');
+        var clickBtn = document.querySelector('#clickBtn');
+        var resetBtn = document.querySelector('#resetBtn');
+        /*
+        querySelector('')은 CSS의 선택기를 그대로 사용 가능
+        id 는 #으로 시작
+        class는 .으로 시작
+        속성은 []로 구분해서 사용
+        태그는 태그 이름으로
+        */
+
+        console.log(memoTxt, demo, resetBtn);
+
+        //이벤트 핸들러
+
+        clickBtn.onclick = function(){
+            console.log("클릭");
+            
+        }
+
+      };
+    </script>
+  </head>
+  <body>
+    <input type="text" id="memoTxt" value="hello, world!"/>
+    <p id="demo">JavaScript can change HTML content.</p>
+    <button type="button" id="clickBtn" class="btn">click</button>
+    <button type="button" id="resetBtn">Reset</button>
+  </body>
+</html>
