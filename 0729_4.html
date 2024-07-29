@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Todo</title>
+    <script>
+        var todoList = [
+            {seq:101, title:"여행하기", done:false},
+            {seq:102, title:"포트폴리오 만들기", done:true},
+            {seq:103, title:"팀 프로젝트 하기", done:false},
+            {seq:104, title:"엄마 생일 선물 준비하기", done:false},
+        ];
+var seqCnt = 105;
+
+      // 이벤트 핸들러를 이용해서 문서의 모든 요소가 로드되면 실행
+      // 자바스크립트 진입점
+      window.addEventListener("load", function () {});
+      window.onload = function () {
+        //console.dir(window.document.body);
+        var memoTxt = document.getElementById("memoTxt");
+        var demo = document.querySelector("#demo");
+        var clickBtn = document.querySelector("#clickBtn");
+        var resetBtn = document.querySelector("#resetBtn");
+
+        var searchTxt = document.querySelector("#searchTxt");
+        var searchBtn = document.querySelector("#searchBtn");
+
+        var returnSeq = 0;
+
+        var handleEvent = function (event){
+            var temp = [
+            {seq:++seqCnt, title:document.querySelector("#memoTxt").value, done:document.querySelector("#doneCheck").checked},
+            ]
+            Array.prototype.push.apply(todoList, temp);
+            //console.log(document.querySelector("#doneCheck").checked);
+            drawList();
+            memoTxt.value ="";
+            memoTxt.focus();
+        }
+
+        function drawList() {
+            demo.innerHTML = "";
+            todoList.forEach(function(todoObj){
+                //console.log(todoObj.seq, todoObj.title, todoObj.done);
+                demo.innerHTML += 
+                `<tr align="center">
+                    <td><input type="checkbox"></td>
+                    <td>${ todoObj.title }</td>
+                    <td><button onclick="handleEdit(this)">수정</button></td>
+                    <td><button onclick="handleDelete(this)">삭제</button></td>
+                </tr>`;
+            });
+        }
+
+        
+        drawList();
+
+        function handleEdit() {
+            console.log("edit");
+        }
+
+        function handleDelete(){
+            console.log("Delete");
+        }
+
+
+        resetBtn.onclick = function(){
+            todoList = [
+            {seq:101, title:"여행하기", done:false},
+            {seq:102, title:"포트폴리오 만들기", done:true},
+            {seq:103, title:"팀 프로젝트 하기", done:false},
+            {seq:104, title:"엄마 생일 선물 준비하기", done:false},
+            ];
+            seqCnt = 105;
+            drawList();
+        }
+
+        clickBtn.addEventListener('click', handleEvent);
+
+        memoTxt.onkeypress = function(event) {
+            if (event.key === 'Enter'){
+                console.log("Enter Key Press");
+                handleEvent();
+            }
+        }
+
+        function search (){
+            demo.innerHTML = "";
+            todoList.forEach(function(todoObj){
+               if (todoObj.title == document.querySelector("#searchTxt").value){
+                    returnSeq = todoObj.seq;
+                    console.log(returnSeq);
+                     demo.innerHTML += 
+                     `<tr align="center">
+                         <td><input type="checkbox" checked = ${todoObj.done}></td>
+                         <td>${ todoObj.title }</td>
+                         <td><button onclick="handleEdit()">수정</button></td>
+                         <td><button onclick="handleDelete()">삭제</button></td>
+                     </tr>`;
+               } });
+            if (returnSeq == 0) {
+                alert("검색 결과가 없습니다.");
+                drawList();
+            }
+            returnSeq = 0;
+        }
+
+        searchBtn.addEventListener('click', search);
+        searchTxt.onkeypress = function(event) {
+            if (event.key === 'Enter'){
+                console.log("Enter Key Press");
+                search();
+            }
+        }
+
+      };
+    </script>
+  </head>
+  <body>
+    <h1>Todo List</h2>
+    메모 : <input type="text" id="memoTxt" value="hello, world!" />
+    완료 : <input type="checkbox" id="doneCheck" checked=false/>
+    <button type="button" id="clickBtn">Save</button>
+    <button type="button" id="resetBtn">Reset</button>
+    <hr>
+    검색 : <input type="text" id="searchTxt"/>
+    <button type="button" id="searchBtn">Search</button>
+    <table id = "demo" width="550" border="1">
+        <thead>
+            <th>확인</th>
+            <th>할일</th>
+            <th>수정</th>
+            <th>삭제</th>
+        </thead>
+    </table>
+  </body>
+</html>
