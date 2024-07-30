@@ -28,6 +28,43 @@ var seqCnt = 105;
 
         var returnSeq = 0;
 
+
+        // 프로토타입 확장 방식은 코드의 구조를 개선하고 재사용성을 높일 수 있지만, 
+        // 기본 객체의 프로토타입을 변경하는 것은 예상치 못한 부작용을 일으킬 수 있습니다. 
+        // 대부분의 경우, 이벤트 핸들링과 DOM 조작을 분리하고, 
+        // 모듈화된 구조를 사용하는 것이 유지보수와 가독성에 더 좋습니다.
+
+        // function handleEdit() {
+        //     console.log("edit");
+        // }
+
+        // function handleDelete(){
+        //     console.log("Delete");
+        // }
+
+        HTMLButtonElement.prototype.handleDelete = function (btn) {
+                //console.dir(btn);
+                // 트래버싱으로 상대적인 요소 찾기
+                var trElement = btn.parentElement.parentElement;
+                console.log('handleDelete 호출 ...', trElement.dataset.seq);
+                tmplist = todoList.filter((todoObj) => todoObj.seq != trElement.dataset.seq)
+                todoList = tmplist;
+                drawList();
+            }
+
+            HTMLButtonElement.prototype.handleEdit = function(btn) {
+                var trElementEdit = btn.parentElement.parentElement;
+                console.log('handleEdit 호출 ...', trElementEdit.dataset.title);
+                var userInput = prompt("수정할 내용을 입력해주세요." + "");
+                todoList.forEach(function(todoObj){
+                    if (todoObj.seq == trElementEdit.dataset.seq){
+                        todoObj.title = userInput;
+                    }
+                });
+                drawList();
+            }
+
+
         var handleEvent = function (event){
             var temp = [
             {seq:++seqCnt, title:document.querySelector("#memoTxt").value, done:document.querySelector("#doneCheck").checked},
@@ -44,7 +81,7 @@ var seqCnt = 105;
             todoList.forEach(function(todoObj){
                 //console.log(todoObj.seq, todoObj.title, todoObj.done);
                 demo.innerHTML += 
-                `<tr align="center">
+                `<tr align="center" data-seq="${todoObj.seq}" data-title="${todoObj.title}">
                     <td><input type="checkbox"></td>
                     <td>${ todoObj.title }</td>
                     <td><button onclick="handleEdit(this)">수정</button></td>
@@ -56,14 +93,7 @@ var seqCnt = 105;
         
         drawList();
 
-        function handleEdit() {
-            console.log("edit");
-        }
-
-        function handleDelete(){
-            console.log("Delete");
-        }
-
+    
 
         resetBtn.onclick = function(){
             todoList = [
@@ -92,11 +122,11 @@ var seqCnt = 105;
                     returnSeq = todoObj.seq;
                     console.log(returnSeq);
                      demo.innerHTML += 
-                     `<tr align="center">
-                         <td><input type="checkbox" checked = ${todoObj.done}></td>
+                     `<tr align="center" data-seq="${todoObj.seq}" data-title="${todoObj.title}">
+                         <td><input type="checkbox"></td>
                          <td>${ todoObj.title }</td>
-                         <td><button onclick="handleEdit()">수정</button></td>
-                         <td><button onclick="handleDelete()">삭제</button></td>
+                         <td><button onclick="handleEdit(this)">수정</button></td>
+                         <td><button onclick="handleDelete(this)">삭제</button></td>
                      </tr>`;
                } });
             if (returnSeq == 0) {
