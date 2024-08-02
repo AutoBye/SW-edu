@@ -1,0 +1,10 @@
+{
+  "name": "todoList",
+  "todoList": [
+    { "no": 1, "title": "Hello, JSON", "done": false },
+    { "no": 2, "title": "Hello, XML", "done": true },
+    { "no": 3, "title": "Hello, TXT", "done": false },
+    { "no": 4, "title": "Hello, AJAX", "done": true }
+  ],
+  "noCnt" : 5
+}

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html lang="kr">
-  <head>
+<html lang="kr" >
+  <head >
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
@@ -16,6 +16,7 @@
     <button id="loadBtn" onclick="loadList()">목록 불러오기</button>
     <ul id="todoListArea"></ul>
     <script>
+      
       // jQuery 라이브러리의 ajax() 함수 (CDN 또는 설치)
       // axios 라이브러리 이용 (CDN 또는 설치)
       // fetch 모듈 (웹 브라우저 표준)
@@ -45,7 +46,7 @@
           // console.log(xhr.responseURL);
           //var doc = xhr.responseXML;
           var todoListTxt = xhr.responseText;
-          var todolist = JSON.parse(todoListTxt)["todoList"];
+          var todolist = JSON.parse(todoListTxt)['todoList'];
           var noCnt = JSON.parse(todoListTxt)["noCnt"];
           // console.log(todolist);
           // console.log(noCnt);
