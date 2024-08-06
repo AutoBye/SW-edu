@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="kr">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>테스트 로그인 페이지</title>
+        <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
+        <script src="./js/login.js"></script>
+        <link rel="stylesheet" href="./style/button.css" />
+        <style>
+            input[name="ID"] {
+                width: 80px;
+                padding: 10px;
+            }
+            input[name="ID"]:focus {
+                width: 90px;
+                padding: 15px;
+            }
+            input[name="PW"] {
+                width: 80px;
+                padding: 10px;
+            }
+            input[name="PW"]:focus {
+                width: 90px;
+                padding: 15px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1>로그인</h1>
+            <form action="" id="loginForm">
+                ID : <input type="text" name="ID" /><br />
+                PW : <input type="text" name="PW" /><br />
+                <a
+                    href=""
+                    onclick="validationForm()"
+                    title="Button push blue/green"
+                    class="button btnPush btnBlueGreen"
+                    >Push</a
+                >
+            </form>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- jQuery CDN 라이브러리 -->
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <!-- axios 라이브러리 -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <h1>Todo List</h1>
+    <button id="loadBtn">목록 불러오기 - fetch()</button>
+    <button id="loadAxiosBtn">목록 불러오기 - axios 라이브러리</button>
+    <ul id="todoListArea"></ul>
+
+    <script>
+      // 다른 라이브러리의 Ajax기능으로 대체하기
+      // jQuery라이브러리의 $.ajax(), $.getJson(), $.get(), $.post() 사용.
+      // axios 라이브러리
+      // fetch() ...
+      const URL = "http://localhost:3000/todo";
+      var TodoList;
+
+      
+      //실습 : fetch로 변경
+      document.querySelector("#loadBtn").addEventListener("click", function () {
+        useFetch();
+      });
+
+      async function useFetch() {
+        const response = await fetch("http://localhost:3000/todo");
+        TodoList = await response.json();
+        console.log("fetch() use Result : ", TodoList);
+        drawList();
+      }
+
+      //실습 : axios 로 변경
+      document.querySelector("#loadAxiosBtn").addEventListener("click", function () {
+          useAxios();
+        });
+
+      
+      async function useAxios() {
+        axios
+          .get(URL)
+          .then((res) => {
+            //console.log(res);
+            console.log("axios use Result : ", res.data);
+            TodoList = res.data;
+            drawList();
+          })
+          .catch((err) => {
+            console.error(err);
+          });
+      }
+
+      async function temp(context) {
+        try {
+          const res = await axios.get(URL, {
+            headers: {},
+          });
+          console.log("axios use Result : ", res.data);
+          TodoList = res.data;
+          drawList();
+        } catch (e) {
+          console.log(e);
+        }
+      }
+
+      function drawList() {
+        const todoListArea = document.querySelector("#todoListArea");
+        TodoList.forEach((element) => {
+          const liElement = document.createElement("li");
+          liElement.innerHTML = element.title;
+          todoListArea.appendChild(liElement);
+        });
+      }
+    </script>
+  </body>
+</html>
