@@ -1,16 +1,74 @@
 <html lang="kr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script src = "https://code.jquery.com/jquery-3.7.1.js"></script>
-    <script>
-        $(document).ready(function() {
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+        <script>
+            $(document).ready(function () {
+                //alert("JQuery 시작");
+                let header = document.getElementById("header");
+                // $ == JQuery
+                // CSS에서 사용되는 선택기를 그대로 사용
 
-        });
-    </script>
-</head>
-<body>
-    
-</body>
+                // console.log($("#header")[0]);
+                // console.log($("#header").get(0));
+                // console.log($(header)[0]);
+                // 셋 다 같다.
+
+                $("#header").css("color", "red");
+                $(header).css("background", "yellow");
+                document.getElementById("header").style.textShadow = "1px 1px 1px black";
+                // 이런식으로 사용하거나
+
+                $("#header").css({
+                    color: "orange",
+                    backgroundColor: "green",
+                    fontFamily: "궁서",
+                });
+                // 이렇게도 가능, 자바스크립트에서 - 는 사용하지 않음
+
+                $("button:nth(0)").click(function () {
+                    $("p:nth(2)").hide(600);
+                    $("h2").css("background", "");
+                    $("p:nth(1)").css("color", "gray");
+                });
+
+                $("button:nth(1)").click(function () {
+                    $("p").show(600);
+                    $("h2").css({
+                        color: "yellow",
+                        backgroundColor: "gray",
+                        fontFamily: "궁서",
+                    });
+                    $("p:nth(1)").css({
+                        color: "",
+                    });
+                    // jQuery 객체를 DOM으로 변경해서 사용  
+                    $("p:nth(1)")[0].innerText = "바꾼 내용";
+                    // jQuery의 text() 또는 html() 메소드 사용
+                    $("p:nth(0)").text("이렇게도 바꿈");
+                    // 메소드 체인
+                    $("p:nth(2)").text("메소드 체인").css({
+                        color: "white",
+                        backgroundColor: "purple"
+                    }).on('click', function(){
+                        alert(this.innerText);
+                        $(this).off('click');
+                    });
+                });
+
+            });
+        </script>
+    </head>
+    <body>
+        <div id="header">
+            <h1>Hello World</h1>
+            <p>환영</h2>
+            <p>합니다</h2>
+            <p>P 태그</p>
+        </div>
+        <button>Hide</button>
+        <button>Show</button>
+    </body>
 </html>
