@@ -1,0 +1,89 @@
+<html lang="kr">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>jQuery Todo List</title>
+        <link rel="stylesheet" href="todoList.css" />
+        <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    </head>
+    <body>
+        <div id = "header">
+            <h1>Todo List</h1>
+            제목 : <input type="text" id="title" value="142124" />
+            <button id="saveBtn">Save</button>
+        </div>
+        <hr />
+        <div>
+            <ul id="listArea"></ul>
+        </div>
+        <script>
+            const todoList = [
+                { no: 101, title: "밥 하기", done: false },
+                { no: 101, title: "빨래 하기", done: false },
+                { no: 101, title: "청소 하기", done: false },
+            ];
+            // $(document).ready()의 축약한 형태
+            let cnt = 1;
+            $(function () {
+                $("#saveBtn").on("click", function () {
+                    // $("body").css({
+                    //     background: "skyblue",
+                    // });
+                    // innerHTML = .html()
+                    // innerText = .text()
+                    // value = .val()
+                    // alert($("#title").val());
+
+                    // input 에서 읽어온 text를 listArea에 추가
+                    // jQuery append() 함수 사용 - 문자열을 즉시 DOM으로
+                    if ($("#title").val()) {
+                        $("#listArea").append(
+                            `<li data-no="10${cnt++}">
+                        <div class="check_wrap">
+                            <input type="checkbox" id = "checkCheck"/>
+                            <label for="checkCheck"><span></span></label>
+                        </div>
+                            <span class = "titleText">${$("#title").val()}</span>
+                            <button class="editBtn">
+                            <img class = "img" src="res/edit.png" alt="Edit" >
+                            <img class = "img-hover" src="res/edit-hover.png" alt="Edit" >
+                        </button>
+                        <button class="delBtn">
+                            <img class = "img" src="res/delete.png" alt="Delete" >
+                            <img class = "img-hover" src="res/deletehover.png" alt="Delete">
+                        </button>
+                        </li>`
+                        );
+                        $(".delBtn").on("click", function (e) {
+                            // console.log(e.target.parentElement); 은 DOM
+                            //$(e.target)은 jQuery 객체
+                            console.log($(e.target).parent().find("div").find("span").text());
+                            //console.log($(e.target).parent().data("no"));
+                            // css("color") 인자를 하나만 쓰면 getter
+                            // css("color", "orange") 인자 두개는 setter
+                        });
+
+                        $(".editBtn").on("click", function () {
+                            alert("edit");
+                        });
+                        // 여러개 들어가니 id 대신 class
+                        $("#title").val("");
+                    } else {
+                        alert("제목 입력!");
+                        $("#title").focus();
+                        return;
+                    }
+                });
+
+                // 미리 생성 X
+                // $(".delBtn").on("click", function () {
+                //     alert("del");
+                // });
+
+                // $(".editBtn").on("click", function () {
+                //     alert("edit");
+                // });
+            });
+        </script>
+    </body>
+</html>
