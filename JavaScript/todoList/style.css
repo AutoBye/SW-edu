@@ -1,0 +1,221 @@
+@font-face {
+    font-family: "SF_HambakSnow";
+    src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2106@1.1/SF_HambakSnow.woff")
+        format("woff");
+    font-weight: normal;
+    font-style: normal;
+}
+
+.hidden {
+    display: none;
+}
+
+#clock {
+    color: white;
+    font-family: "SF_HambakSnow";
+    text-shadow: 1px 1px 2px white;
+    text-align: center;
+    line-height: 100%;
+    font-size: 120px;
+}
+
+#login-form {
+    text-align: center;
+    line-height: 100%;
+}
+
+#form-input {
+    width: 300px;
+    height: 50px;
+}
+
+#greeting {
+    color: white;
+    font-family: "SF_HambakSnow";
+    text-shadow: 1px 1px 2px white;
+    text-align: center;
+    line-height: 100%;
+    font-size: 120px;
+}
+
+#todo-form {
+    text-align: center;
+    line-height: 100%;
+}
+
+#input {
+    width: 300px;
+    height: 50px;
+}
+
+footer {
+    position : fixed;
+    bottom : 0;
+    align-content: center;
+    width: 100%;
+    text-align: center;
+}
+
+#todo-list {
+    padding: 0; 
+    list-style: none; 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center;
+}
+
+
+li {
+    width: 700px;
+    background-color: white;
+    display: block;
+    text-align: center;
+    border: 1px solid black;
+}
+
+
+button {
+    color: white;
+}
+
+span {
+    font-family: "SF_HambakSnow";
+    font-size: 17px;
+}
+
+#weather span {
+    color: white;
+    font-family: "SF_HambakSnow";
+    text-shadow: 1px 1px 2px white;
+}
+
+#weather {
+    color: white;
+    font-family: "SF_HambakSnow";
+    text-align: center;
+}
+
+#quote {
+    color: white;
+    font-family: "SF_HambakSnow";
+}
+
+img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0px;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    z-index: -1;
+    opacity: 50%;
+}
+
+button {
+    background: none;
+    border: 0;
+}
+
+body {
+    position: flex;
+    background: radial-gradient(ellipse at bottom, #0d1d31 0%, #0c0d13 100%);
+    justify-content: center;
+    align-items: center;
+    vertical-align: bottom;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.starry-sky {
+    position: absolute; /* 절대 위치로 설정하여 다른 요소와 겹치지 않도록 함 */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* 배경으로 설정하여 다른 요소 위에 표시되지 않도록 함 */
+    background-size: cover;
+    overflow: hidden;
+}
+
+.shooting-star {
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: 0 0 6px #fff;
+    animation: shoot 2s linear infinite, blink 1.5s linear infinite;
+}
+
+@keyframes shoot {
+    from {
+        left: -100px;
+        top: 20%;
+        opacity: 1;
+        transform: translateY(0);
+    }
+    to {
+        left: 100vw;
+        top: 80%;
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes blink {
+    0% {
+        opacity: 0.5;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0.5;
+    }
+}
+
+/* 별똥별의 다양한 속도와 위치를 조절 */
+@keyframes shoot1 {
+    from {
+        left: -10%;
+        top: 10%;
+        opacity: 1;
+        transform: translateY(0);
+    }
+    to {
+        left: 110%;
+        top: 50%;
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes shoot2 {
+    from {
+        left: -10%;
+        top: 30%;
+        opacity: 1;
+        transform: translateY(0);
+    }
+    to {
+        left: 110%;
+        top: 70%;
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+}
+
+.shooting-star:nth-child(1) {
+    animation: shoot 4s linear infinite;
+}
+
+.shooting-star:nth-child(2) {
+    animation: shoot1 3s linear infinite;
+}
+
+.shooting-star:nth-child(3) {
+    animation: shoot2 5s linear infinite;
+}
